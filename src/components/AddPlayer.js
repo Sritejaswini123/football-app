@@ -47,8 +47,8 @@ const AddPlayer = ({ addPlayer, onCancel }) => {
           <label htmlFor="age">Age:</label>
           <input type="number" id="age" value={age} onChange={handleAgeChange} />
         </div>
-        <button type="submit">Add</button>
-        <button type="button" onClick={onCancel}>
+        <button  className="add-btn"  type="submit">Add</button>
+        <button  className="edit-btn"  type="button" onClick={onCancel}>
           Cancel
         </button>
       </form>

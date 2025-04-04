@@ -1,71 +1,75 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import PlayerList from "./components/PlayerList"
-import EditPlayer from "./components/EditPlayer"
-import AddPlayer from "./components/AddPlayer"
-import DeletePlayer from "./components/DeletePlayer"
-import data from "./data/players.json"
-import "./App.css"
+import { useState } from "react";
+import PlayerList from "./components/PlayerList";
+import EditPlayer from "./components/EditPlayer";
+import AddPlayer from "./components/AddPlayer";
+import DeletePlayer from "./components/DeletePlayer";
+import data from "./data/players.json";
+import "./App.css";
 
 function App() {
-  const [players, setPlayers] = useState(data.players)
-  const [currentPlayer, setCurrentPlayer] = useState(null)
-  const [showEditPlayer, setShowEditPlayer] = useState(false)
-  const [showAddPlayer, setShowAddPlayer] = useState(false)
-  const [showDeletePlayer, setShowDeletePlayer] = useState(false)
-  const [playerToDelete, setPlayerToDelete] = useState(null)
+  const [players, setPlayers] = useState(data.players);
+  const [currentPlayer, setCurrentPlayer] = useState(null);
+  const [showEditPlayer, setShowEditPlayer] = useState(false);
+  const [showAddPlayer, setShowAddPlayer] = useState(false);
+  const [showDeletePlayer, setShowDeletePlayer] = useState(false);
+  const [playerToDelete, setPlayerToDelete] = useState(null);
 
   const handleDelete = (id) => {
-    setPlayerToDelete(id)
-    setShowDeletePlayer(true)
-  }
+    setPlayerToDelete(id);
+    setShowDeletePlayer(true);
+  };
 
   const deletePlayer = (id) => {
-    const updatedPlayers = players.filter((player) => player.id !== id)
-    setPlayers(updatedPlayers)
-    setShowDeletePlayer(false)
-  }
+    const updatedPlayers = players.filter((player) => player.id !== id);
+    setPlayers(updatedPlayers);
+    setShowDeletePlayer(false);
+  };
 
   const handleCancelDelete = () => {
-    setShowDeletePlayer(false)
-  }
+    setShowDeletePlayer(false);
+  };
 
   const handleEdit = (id) => {
-    const player = players.find((player) => player.id === id)
-    setCurrentPlayer(player)
-    setShowEditPlayer(true)
-  }
+    const player = players.find((player) => player.id === id);
+    setCurrentPlayer(player);
+    setShowEditPlayer(true);
+  };
 
   const editPlayer = (updatedPlayer) => {
-    const updatedPlayers = players.map((player) => (player.id === updatedPlayer.id ? updatedPlayer : player))
-    setPlayers(updatedPlayers)
-    setCurrentPlayer(null)
-    setShowEditPlayer(false)
-  }
+    const updatedPlayers = players.map((player) =>
+      player.id === updatedPlayer.id ? updatedPlayer : player
+    );
+    setPlayers(updatedPlayers);
+    setCurrentPlayer(null);
+    setShowEditPlayer(false);
+  };
 
   const handleCancelEdit = () => {
-    setCurrentPlayer(null)
-    setShowEditPlayer(false)
-  }
+    setCurrentPlayer(null);
+    setShowEditPlayer(false);
+  };
 
   const handleAddPlayer = () => {
-    setShowAddPlayer(true)
-  }
+    setShowAddPlayer(true);
+  };
 
   const addPlayer = (player) => {
+    const newId = players.length > 0 ? Math.max(...players.map(p => p.id)) + 1 : 1;
+
     const newPlayer = {
-      id: Math.floor(Math.random() * 1000),
+      id: newId, // Fix for sequential IDs
       ...player,
-    }
-    const updatedPlayers = [...players, newPlayer]
-    setPlayers(updatedPlayers)
-    setShowAddPlayer(false)
-  }
+    };
+
+    setPlayers([...players, newPlayer]);
+    setShowAddPlayer(false);
+  };
 
   const handleCancelAdd = () => {
-    setShowAddPlayer(false)
-  }
+    setShowAddPlayer(false);
+  };
 
   return (
     <div className="App">
@@ -84,8 +88,7 @@ function App() {
         <PlayerList players={players} onDelete={handleDelete} onEdit={handleEdit} onAdd={handleAddPlayer} />
       )}
     </div>
-  )
+  );
 }
 
-export default App
-
+export default App;

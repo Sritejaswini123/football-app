@@ -22,14 +22,14 @@ const PlayerList = ({ players, onDelete, onEdit, onAdd }) => {
               <td>{player.age}</td>
               <td>{player.position}</td>
               <td>
-                <button onClick={() => onEdit(player.id)}>Edit</button>
-                <button onClick={() => onDelete(player.id)}>Delete</button>
+                <button className="edit-btn" onClick={() => onEdit(player.id)}>Edit</button>
+                <button className="delete-btn" onClick={() => onDelete(player.id)}>Delete</button>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
-      <button onClick={onAdd}>Add New Player</button>
+      <button  className="add-btn" onClick={onAdd}>Add New Player</button>
     </div>
   )
 }

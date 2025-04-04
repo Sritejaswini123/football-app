@@ -39,8 +39,8 @@ const EditPlayer = ({ player, editPlayer, onCancel }) => {
           <input type="number" id="age" value={age} onChange={handleAgeChange} />
         </div>
         <div>
-          <button type="submit">Save</button>
-          <button type="button" onClick={onCancel}>
+          <button className="add-btn" type="submit">Save</button>
+          <button className="edit-btn" type="button" onClick={onCancel}>
             Cancel
           </button>
         </div>
